@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật Mẹ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="balloon.min.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            background: #f8f4f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Birthday bunting flags */
+        .bunting {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .flag {
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 20px;
+        }
+
+        .flag-red {
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 35px solid #ff4757;
+        }
+
+        .flag-orange {
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 35px solid #ffa726;
+        }
+
+        .flag-green {
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 35px solid #26a69a;
+        }
+
+        .flag-blue {
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 35px solid #42a5f5;
+        }
+
+        /* Colorful confetti scattered background */
+        .background-confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: fallDown 3s linear infinite;
+        }
+
+        @keyframes fallDown {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(80vh) rotate(90deg) scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(30vh) rotate(180deg) scale(1.2);
+            }
+
+            90% {
+                opacity: 0.8;
+                transform: translateY(10vh) rotate(270deg) scale(0.8);
+            }
+
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti explosion from bottom */
+        .confetti-explosion {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            z-index: 500;
+            pointer-events: none;
+        }
+
+        .exploding-confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: explodeUp 3s ease-out forwards;
+        }
+
+        @keyframes explodeUp {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+
+            25% {
+                opacity: 1;
+                transform: translateY(-40vh) translateX(var(--confetti-x)) rotate(90deg) scale(1.2);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: translateY(-60vh) translateX(var(--confetti-x)) rotate(180deg) scale(1);
+            }
+
+            75% {
+                opacity: 0.7;
+                transform: translateY(-80vh) translateX(var(--confetti-x)) rotate(270deg) scale(0.8);
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(var(--confetti-x)) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Hiệu ứng pháo hoa */
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px currentColor;
+            animation: firework 1.5s ease-out forwards;
+        }
+
+        @keyframes firework {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 1;
+                box-shadow: 0 0 20px currentColor;
+            }
+
+            15% {
+                transform: translateY(20vh) scale(1.5);
+                opacity: 1;
+                box-shadow: 0 0 30px currentColor;
+            }
+
+            100% {
+                transform: translateY(20vh) scale(0);
+                opacity: 0;
+                box-shadow: 0 0 50px currentColor;
+            }
+        }
+
+        .spark {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
+            animation: spark 1s ease-out forwards;
+        }
+
+        @keyframes spark {
+            0% {
+                transform: scale(1.5);
+                opacity: 1;
+                box-shadow: 0 0 15px currentColor;
+            }
+
+            100% {
+                transform: scale(0) translate(var(--spark-x), var(--spark-y));
+                opacity: 0;
+                box-shadow: 0 0 30px currentColor;
+            }
+        }
+
+        /* Header với chữ Birthday */
+        .header {
+            text-align: center;
+            padding: 120px 20px 60px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .birthday-text {
+            font-size: 6rem;
+            font-weight: 700;
+            color: #5d72f5;
+            margin-bottom: 20px;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .mom-text {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #5d72f5;
+            margin-bottom: 30px;
+        }
+
+        .wish-text {
+            font-size: 1.8rem;
+            color: #5d72f5;
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(2deg);
+            }
+        }
+
+        /* Birthday cake */
+        .cake-container {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        .birthday-cake {
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .cake-base {
+            width: 220px;
+            height: 90px;
+            background: linear-gradient(145deg, #ffa726, #ff8f00);
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .cake-layer {
+            width: 160px;
+            height: 60px;
+            background: linear-gradient(145deg, #ffb74d, #ffa726);
+            border-radius: 15px 15px 0 0;
+            position: absolute;
+            top: -60px;
+            left: 30px;
+            z-index: -100;
+        }
+
+        /* Số ngày trên bánh kem */
+        .cake-date {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: 'Dancing Script', cursive;
+            z-index: 10;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+
+            100% {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .candle {
+            position: absolute;
+            width: 4px;
+            height: 25px;
+            background: #8bc34a;
+            top: -84px;
+            border-radius: 2px;
+        }
+
+        .candle-1 {
+            left: 54px;
+        }
+
+        .candle-2 {
+            left: 69px;
+        }
+
+        .candle-3 {
+            left: 84px;
+        }
+
+        .candle-4 {
+            left: 99px;
+        }
+
+        .candle-5 {
+            left: 114px;
+        }
+
+        .candle-6 {
+            left: 129px;
+        }
+
+        .candle-7 {
+            left: 144px;
+        }
+
+        .candle-8 {
+            left: 159px;
+        }
+
+        .flame {
+            position: absolute;
+            top: -8px;
+            left: -2px;
+            width: 8px;
+            height: 10px;
+            background: radial-gradient(circle, #ff3535 0%, #f7931e 50%, #ffeb3b 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: scale(1) rotate(-1deg);
+            }
+
+            100% {
+                transform: scale(1.1) rotate(1deg);
+            }
+        }
+
+        /* Gift boxes - Font Awesome Icons */
+        .gifts-container {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 50px;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .gift-box {
+            position: relative;
+            animation: bounce 2s ease-in-out infinite;
+            font-size: 4rem;
+            color: #ff6b6b;
+            text-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.1);
+            text-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+        }
+
+        .gift-box-1 {
+            animation-delay: 0s;
+            color: #ff6b6b;
+        }
+
+        .gift-box-2 {
+            animation-delay: 0.5s;
+            color: #4facfe;
+        }
+
+        .gift-box-3 {
+            animation-delay: 1s;
+            color: #43e97b;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Container cho các khung ảnh */
+        .photos-container {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .photo-frame {
+            width: 420px;
+            height: 550px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            margin: 60px auto;
+            padding: 25px;
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .photo-frame:hover::before {
+            transform: translateX(100%);
+        }
+
+        .photo-frame.visible {
+            opacity: 1;
+        }
+
+        .photo-frame:nth-child(1) {
+            transform: rotate(10deg) translateY(100px) scale(0.8);
+        }
+
+        .photo-frame:nth-child(2) {
+            transform: rotate(3deg) translateY(100px) scale(0.8);
+        }
+
+        .photo-frame:nth-child(3) {
+            transform: rotate(-2deg) translateY(100px) scale(0.8);
+        }
+
+        .photo-frame.visible:nth-child(1) {
+            transform: translateY(0) scale(1);
+            animation: bounceIn 0.8s ease-out;
+        }
+
+        .photo-frame.visible:nth-child(2) {
+            transform: rotate(3deg) translateY(0) scale(1);
+            animation: bounceIn 0.8s ease-out 0.2s both;
+        }
+
+        .photo-frame.visible:nth-child(3) {
+            transform: rotate(-2deg) translateY(0) scale(1);
+            animation: bounceIn 0.8s ease-out 0.4s both;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3) rotate(var(--rotation, 0deg));
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.1) rotate(var(--rotation, 0deg));
+            }
+
+            70% {
+                transform: scale(0.9) rotate(var(--rotation, 0deg));
+            }
+
+            100% {
+                transform: scale(1) rotate(var(--rotation, 0deg));
+                opacity: 1;
+            }
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 440px;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #666;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .photo-placeholder i {
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-placeholder .text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Styling cho hình ảnh trong khung */
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 10px;
+            display: block;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .photo-caption {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        /* Tin nhắn chúc mừng */
+        .birthday-message {
+            text-align: center;
+            padding: 60px 40px;
+            color: #5d72f5;
+            font-size: 2.2rem;
+            max-width: 800px;
+            margin: 40px auto;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            border: 2px solid rgba(93, 114, 245, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Heart floating animation */
+        .heart {
+            position: fixed;
+            font-size: 24px;
+            animation: floatHeart 4s linear infinite;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) rotate(324deg) scale(1.2);
+            }
+
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti effect */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti 3s linear infinite;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .birthday-text {
+                font-size: 4rem;
+            }
+
+            .mom-text {
+                font-size: 2rem;
+            }
+
+            .calendar-date {
+                font-size: 3rem;
+            }
+
+            .photo-frame {
+                width: 340px;
+                height: 470px;
+            }
+
+            .photo-placeholder {
+                height: 360px;
+            }
+
+            .birthday-message {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bunting" id="bunting"></div>
+    <div class="fireworks" id="fireworks"></div>
+
+    <header class="header">
+        <h1 class="birthday-text">HAPPY</h1>
+        <h1 class="birthday-text" style="font-style: italic; margin-top: -20px;">Birthday muộn</h1>
+        <p class="wish-text">Wish You All The Best</p>
+        <h2 class="mom-text">Mẹ Yêu ❤️</h2>
+    </header>
+
+    <div class="cake-container">
+        <div class="birthday-cake">
+            <div class="cake-base">
+                <div class="cake-date">4-9</div>
+                <div class="cake-layer"></div>
+                <div class="candle candle-1">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle candle-2">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle candle-3">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle candle-4">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle candle-5">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle candle-6">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle candle-7">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle candle-8">
+                    <div class="flame"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="birthday-message">
+        Chúc mẹ sinh nhật vui vẻ, luôn khỏe mạnh và hạnh phúc!<br>
+        Trọn đầy niềm vui! 💝
+    </div>
+
+    <div class="photos-container">
+        <div class="photo-frame">
+            <div class="photo-placeholder">
+                <!-- <i class="fas fa-camera"></i>
+                <div class="text">Ảnh kỷ niệm đầu tiên</div> -->
+                <img src="hinh1.jpg" alt="">
+            </div>
+            <div class="photo-caption">Khoảnh khắc đáng nhớ</div>
+        </div>
+
+        <div class="photo-frame">
+            <div class="photo-placeholder">
+                <!-- <i class="fas fa-heart"></i>
+                <div class="text">Ảnh kỷ niệm thứ hai</div> -->
+                <img src="hinh2.jpg" alt="">
+            </div>
+            <div class="photo-caption">Những ngày hạnh phúc</div>
+        </div>
+
+        <div class="photo-frame">
+            <div class="photo-placeholder">
+                <!-- <i class="fas fa-star"></i>
+                <div class="text">Ảnh kỷ niệm thứ ba</div> -->
+                <img src="hinh3.jpg" alt="">
+            </div>
+            <div class="photo-caption">Nụ cười trên môi</div>
+        </div>
+    </div>
+
+    <div class="gifts-container">
+        <div class="gift-box gift-box-1">
+            <i class="fas fa-gift"></i>
+        </div>
+        <div class="gift-box gift-box-2">
+            <i class="fas fa-birthday-cake"></i>
+        </div>
+        <div class="gift-box gift-box-3">
+            <i class="fas fa-heart"></i>
+        </div>
+    </div>
+
+    <script>
+        // Tạo background confetti rơi
+        function createBackgroundConfetti() {
+            // Pháo hoa từ dưới lên trên
+            confetti({
+                particleCount: 50,
+                angle: 90,
+                spread: 45,
+                origin: { x: Math.random(), y: 1 },
+                colors: ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#26a69a', '#ffa726']
+            });
+        }
+
+        // Tạo confetti bắn liên tục
+        function createShootingConfetti() {
+            // Pháo hoa bắn từ hai bên
+            confetti({
+                particleCount: 30,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0, y: 0.8 },
+                colors: ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff']
+            });
+
+            confetti({
+                particleCount: 30,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1, y: 0.8 },
+                colors: ['#26a69a', '#ffa726', '#ff4757', '#3742fa', '#5f27cd']
+            });
+        }
+
+        // Pháo hoa đặc biệt khi click
+        function createClickFireworks(x, y) {
+            // Pháo hoa burst
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { x: x / window.innerWidth, y: y / window.innerHeight },
+                colors: ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#26a69a', '#ffa726']
+            });
+
+            // Pháo hoa sao
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    spread: 26,
+                    startVelocity: 55,
+                    origin: { x: x / window.innerWidth, y: y / window.innerHeight },
+                    shapes: ['star'],
+                    colors: ['#FFD700', '#FFA500', '#FF69B4', '#00CED1']
+                });
+            }, 200);
+        }
+
+        // Pháo hoa hình trái tim
+        function createHeartFireworks() {
+            const heartShape = confetti.shapeFromText({ text: '❤️', scalar: 2 });
+
+            confetti({
+                particleCount: 20,
+                spread: 100,
+                origin: { x: Math.random(), y: 0.8 },
+                shapes: [heartShape],
+                colors: ['#FF69B4', '#FF1493', '#DC143C', '#B22222']
+            });
+        }
+
+        // Pháo hoa rainbow
+        function createRainbowFireworks() {
+            confetti({
+                particleCount: 80,
+                spread: 60,
+                origin: { x: 0.5, y: 0.8 },
+                colors: ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3']
+            });
+        }
+
+        // Pháo hoa school pride
+        function createPrideFireworks() {
+            confetti({
+                particleCount: 40,
+                spread: 50,
+                startVelocity: 45,
+                origin: { x: 0.2, y: 0.8 },
+                colors: ['#ff6b6b', '#feca57']
+            });
+
+            confetti({
+                particleCount: 40,
+                spread: 50,
+                startVelocity: 45,
+                origin: { x: 0.8, y: 0.8 },
+                colors: ['#48dbfb', '#ff9ff3']
+            });
+
+            setTimeout(() => {
+                confetti({
+                    particleCount: 60,
+                    spread: 80,
+                    startVelocity: 50,
+                    origin: { x: 0.5, y: 0.9 },
+                    colors: ['#54a0ff', '#26a69a', '#ffa726']
+                });
+            }, 300);
+        }
+
+        // Tạo bunting flags
+        function createBunting() {
+            const bunting = document.getElementById('bunting');
+            const flagTypes = ['flag-red', 'flag-orange', 'flag-green', 'flag-blue'];
+
+            for (let i = 0; i < 15; i++) {
+                const flag = document.createElement('div');
+                flag.className = `flag ${flagTypes[i % flagTypes.length]}`;
+                flag.style.left = (i * 7) + '%';
+                bunting.appendChild(flag);
+            }
+        }
+
+        // Tạo bóng bay text với balloons-js
+        window.releaseTextBalloons = function () {
+            textBalloons([
+                {
+                    text: "🎉Chuc",
+                    fontSize: 80,
+                    color: "#4facfe",
+                },
+                {
+                    text: "mung",
+                    fontSize: 80,
+                    color: "#43e97b",
+                },
+                {
+                    text: "sinhnhat",
+                    fontSize: 50,
+                    color: "#43e97b",
+                },
+                {
+                    text: "Me❤️",
+                    fontSize: 100,
+                    color: "#feca57",
+                },
+                {
+                    text: "🎈",
+                    fontSize: 110,
+                    color: "#feca57",
+                },
+                {
+                    text: "🎉Cam",
+                    fontSize: 90,
+                    color: "#4facfe",
+                },
+                {
+                    text: "Huong🎉",
+                    fontSize: 90,
+                    color: "#4facfe",
+                },
+            ]);
+        };
+
+        function createBalloons() {
+            releaseTextBalloons();
+        }
+        // Tạo particles background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (3 + Math.random() * 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Tạo confetti
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd'];
+
+            for (let i = 0; i < 10; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+
+        // Tạo hiệu ứng pháo hoa nâng cao
+        function createFirework() {
+            const fireworksContainer = document.getElementById('fireworks');
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#ff4757', '#3742fa'];
+
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+            fireworksContainer.appendChild(firework);
+
+            // Tạo tia lửa sau khi pháo hoa nổ
+            setTimeout(() => {
+                createSparks(firework);
+            }, 200);
+
+            // Xóa pháo hoa sau khi hoàn thành
+            setTimeout(() => {
+                firework.remove();
+            }, 1500);
+        }
+
+        function createSparks(firework) {
+            const rect = firework.getBoundingClientRect();
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#ff4757', '#3742fa'];
+
+            for (let i = 0; i < 15; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.left = rect.left + 'px';
+                spark.style.top = rect.top + 'px';
+                spark.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+                const angle = (i * 24) * Math.PI / 180;
+                const distance = 80 + Math.random() * 70;
+                spark.style.setProperty('--spark-x', Math.cos(angle) * distance + 'px');
+                spark.style.setProperty('--spark-y', Math.sin(angle) * distance + 'px');
+
+                document.getElementById('fireworks').appendChild(spark);
+
+                setTimeout(() => {
+                    spark.remove();
+                }, 1000);
+            }
+        }
+
+        // Tạo trái tim bay nâng cao
+        function createHeart() {
+            const hearts = ['❤️', '💖', '💕', '💗', '💝', '💘'];
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.color = `hsl(${Math.random() * 60 + 300}, 70%, 60%)`;
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        // Hiệu ứng cuộn để hiện khung ảnh
+        function handleScroll() {
+            const photoFrames = document.querySelectorAll('.photo-frame');
+
+            photoFrames.forEach((frame, index) => {
+                const rect = frame.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                if (rect.top < windowHeight * 0.8) {
+                    setTimeout(() => {
+                        frame.classList.add('visible');
+                    }, index * 200); // Delay cho từng khung ảnh
+                }
+            });
+        }
+
+        // Bắt đầu hiệu ứng khi trang tải
+        window.addEventListener('load', () => {
+            // Pháo hoa chào mừng ban đầu - chỉ 1 lần
+            setTimeout(() => {
+                createPrideFireworks();
+            }, 500);
+
+            setTimeout(() => {
+                createRainbowFireworks();
+            }, 1000);
+
+            setTimeout(() => {
+                createBackgroundConfetti();
+            }, 1500);
+
+            // Tạo bunting flags
+            createBunting();
+
+            // Tạo bóng bay với balloons-js
+            setTimeout(() => {
+                releaseTextBalloons();
+            }, 2000);
+
+            // Kiểm tra cuộn trang
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Kiểm tra ngay khi tải trang
+        });
+
+        // Tạo thêm pháo hoa khi click
+        document.addEventListener('click', (e) => {
+            // Chỉ pháo hoa canvas confetti tại vị trí click - đã giảm số lượng
+            confetti({
+                particleCount: 50,
+                spread: 50,
+                origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
+                colors: ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff']
+            });
+        });
+    </script>
+</body>
+
+</html>
