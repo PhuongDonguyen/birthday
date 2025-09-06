@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chúc Mừng Sinh Nhật Mẹ</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-
-
+    
+    <!-- Birthday Audio -->
+    <audio id="birthdayAudio" loop>
+        <source src="sound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="balloon.min.js" defer></script>
@@ -433,207 +436,6 @@
             }
         }
 
-        /* Photo Book Styles */
-        .photo-book-section {
-            padding: 50px 0 150px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #f5f3f0, #e8e5e0);
-            margin: 20px 0;
-        }
-
-        .photo-book-title {
-            font-size: 2.5rem;
-            color: #8b4513;
-            margin-bottom: 30px;
-            font-family: 'Dancing Script', cursive;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .photo-book {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .book-cover {
-            width: 300px;
-            height: 400px;
-            margin: 0 auto;
-            background: linear-gradient(145deg, #8b4513, #a0522d);
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .book-cover:hover {
-            transform: translateY(-10px) rotateY(5deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .cover-content {
-            padding: 40px 20px;
-            color: white;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .cover-content h3 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .cover-content p {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .cover-decoration {
-            font-size: 3rem;
-            margin: 20px 0;
-            animation: heartbeat 2s infinite;
-        }
-
-        .open-text {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 20px;
-            padding: 8px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-        }
-
-        @keyframes heartbeat {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        .book-pages {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .book-navigation {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            z-index: 1001;
-        }
-
-        .nav-btn,
-        .close-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .nav-btn:hover,
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.1);
-        }
-
-        .close-btn {
-            background: rgba(255, 0, 0, 0.6);
-            margin-left: 20px;
-        }
-
-        .page-indicator {
-            color: white;
-            font-size: 1.1rem;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-        }
-
-        .book-page {
-            display: none;
-            max-width: 500px;
-            width: 90%;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            animation: pageSlide 0.5s ease;
-        }
-
-        .book-page.active {
-            display: block;
-        }
-
-        @keyframes pageSlide {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .page-content {
-            padding: 30px;
-            text-align: center;
-        }
-
-        .page-content img {
-            width: 100%;
-            max-width: 300px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .page-content h4 {
-            font-size: 1.8rem;
-            color: #8b4513;
-            margin-bottom: 15px;
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .page-content p {
-            font-size: 1.1rem;
-            color: #666;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
         /* Gift boxes - Font Awesome Icons */
         .gifts-container {
             position: fixed;
@@ -952,11 +754,6 @@
 </head>
 
 <body>
-    <!-- Birthday Audio -->
-    <audio id="autoplay" playsinline autoplay>
-        <source src="sound.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
     <div class="bunting" id="bunting"></div>
     <div class="fireworks" id="fireworks"></div>
 
@@ -1032,83 +829,6 @@
             </div>
             <div class="photo-caption">Nụ cười trên môi</div>
         </div>
-
-        <div class="photo-frame">
-            <div class="photo-placeholder">
-                <img src="hinh4.jpg" alt="">
-            </div>
-            <div class="photo-caption">Kỷ niệm đẹp</div>
-        </div>
-
-        <div class="photo-frame">
-            <div class="photo-placeholder">
-                <img src="hinh5.jpg" alt="">
-            </div>
-            <div class="photo-caption">Yêu thương mãi mãi</div>
-        </div>
-    </div>
-
-    <!-- Interactive Photo Book -->
-    <div class="photo-book-section">
-        <h2 class="photo-book-title">📖 Album Kỷ Niệm</h2>
-        <div class="photo-book">
-            <div class="book-cover" onclick="openPhotoBook(event)">
-                <div class="cover-content">
-                    <h3>Những Khoảnh Khắc</h3>
-                    <p>Đẹp Nhất</p>
-                    <div class="cover-decoration">❤️</div>
-                    <div class="open-text">Click để mở</div>
-                </div>
-            </div>
-
-            <div class="book-pages" id="photoBook" style="display: none;">
-                <div class="book-navigation">
-                    <button class="nav-btn prev-btn" onclick="previousPage()" id="prevBtn">‹</button>
-                    <span class="page-indicator" id="pageIndicator">1 / 5</span>
-                    <button class="nav-btn next-btn" onclick="nextPage()" id="nextBtn">›</button>
-                </div>
-
-                <div class="book-page active" data-page="1">
-                    <div class="page-content">
-                        <img src="hinh1.jpg" alt="Kỷ niệm 1">
-                        <h4>Khoảnh khắc đáng nhớ</h4>
-                        <p>Những kỷ niệm đầu tiên luôn đặc biệt trong lòng chúng ta.</p>
-                    </div>
-                </div>
-
-                <div class="book-page" data-page="2">
-                    <div class="page-content">
-                        <img src="hinh2.jpg" alt="Kỷ niệm 2">
-                        <h4>Những ngày hạnh phúc</h4>
-                        <p>Hạnh phúc là những giây phút bên nhau, chia sẻ cùng nhau.</p>
-                    </div>
-                </div>
-
-                <div class="book-page" data-page="3">
-                    <div class="page-content">
-                        <img src="hinh3.jpg" alt="Kỷ niệm 3">
-                        <h4>Nụ cười trên môi</h4>
-                        <p>Nụ cười của mẹ là điều đẹp nhất trên đời này.</p>
-                    </div>
-                </div>
-
-                <div class="book-page" data-page="4">
-                    <div class="page-content">
-                        <img src="hinh4.jpg" alt="Kỷ niệm 4">
-                        <h4>Kỷ niệm đẹp</h4>
-                        <p>Mỗi khoảnh khắc bên mẹ đều là một món quà quý giá.</p>
-                    </div>
-                </div>
-
-                <div class="book-page" data-page="5">
-                    <div class="page-content">
-                        <img src="hinh5.jpg" alt="Kỷ niệm 5">
-                        <h4>Yêu thương mãi mãi</h4>
-                        <p>Tình yêu dành cho mẹ sẽ không bao giờ thay đổi!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="gifts-container">
@@ -1124,48 +844,18 @@
     </div>
 
     <script>
-        // Play music when user scrolls
-        let audioPlayed = false;
-
-        function playMusicOnScroll() {
-            if (!audioPlayed) {
-                const audio = document.getElementById('autoplay');
-                audio.volume = 0.7;
-                audio.play().then(() => {
-                    console.log('Music started playing on scroll');
-                    audioPlayed = true;
-                    // Remove scroll listener after first play
-                    window.removeEventListener('scroll', playMusicOnScroll);
-                }).catch((error) => {
-                    console.log('Failed to play audio:', error);
-                });
-            }
-        }
-
-        // Add scroll event listener
-        window.addEventListener('scroll', playMusicOnScroll);
-
-        // Also try to play on any user interaction as fallback
-        function playMusicOnInteraction() {
-            if (!audioPlayed) {
-                const audio = document.getElementById('autoplay');
-                audio.volume = 0.7;
-                audio.play().then(() => {
-                    console.log('Music started playing on interaction');
-                    audioPlayed = true;
-                    // Remove all event listeners after successful play
-                    window.removeEventListener('scroll', playMusicOnScroll);
-                    document.removeEventListener('click', playMusicOnInteraction);
-                    document.removeEventListener('touchstart', playMusicOnInteraction);
-                }).catch((error) => {
-                    console.log('Failed to play audio:', error);
-                });
-            }
-        }
-
-        // Fallback interaction listeners
-        document.addEventListener('click', playMusicOnInteraction, { once: true });
-        document.addEventListener('touchstart', playMusicOnInteraction, { once: true });
+        // Auto-play birthday music
+        window.addEventListener('load', function() {
+            const audio = document.getElementById('birthdayAudio');
+            // Try to play music automatically
+            audio.play().catch(function(error) {
+                console.log('Auto-play prevented by browser. User interaction required.');
+                // Fallback: play music on any user interaction
+                document.addEventListener('click', function() {
+                    audio.play();
+                }, { once: true });
+            });
+        });
 
         // Tạo background confetti rơi
         function createBackgroundConfetti() {
@@ -1472,210 +1162,15 @@
             handleScroll(); // Kiểm tra ngay khi tải trang
         });
 
-        // Tạo thêm pháo hoa khi click (except on interactive elements)
-        // Add slight delay to ensure other click handlers run first
+        // Tạo thêm pháo hoa khi click
         document.addEventListener('click', (e) => {
-            setTimeout(() => {
-                // Check if click is on interactive elements that shouldn't trigger fireworks
-                const clickTarget = e.target;
-                const isInteractiveElement =
-                    clickTarget.closest('.book-cover') ||
-                    clickTarget.closest('.photo-book') ||
-                    clickTarget.closest('.book-pages') ||
-                    clickTarget.closest('.nav-btn') ||
-                    clickTarget.closest('.close-btn') ||
-                    clickTarget.closest('button') ||
-                    clickTarget.closest('audio') ||
-                    clickTarget.tagName === 'BUTTON' ||
-                    clickTarget.classList.contains('book-cover') ||
-                    clickTarget.onclick; // Skip if element has onclick handler
-
-                // Only create fireworks if not clicking on interactive elements
-                if (!isInteractiveElement) {
-                    confetti({
-                        particleCount: 50,
-                        spread: 50,
-                        origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
-                        colors: ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff']
-                    });
-                }
-            }, 10); // Small delay to let other handlers run first
-        });
-
-        // Photo Book JavaScript
-        let currentPage = 1;
-        const totalPages = 5;
-
-        // Add click event listener for photo book cover (using capturing to ensure it fires first)
-        document.addEventListener('DOMContentLoaded', function () {
-            const bookCover = document.querySelector('.book-cover');
-            if (bookCover) {
-                bookCover.addEventListener('click', function (event) {
-                    console.log('Book cover clicked!'); // Debug message
-                    event.stopPropagation();
-                    event.preventDefault();
-                    openPhotoBook(event);
-                }, true); // Use capturing phase
-            }
-        });
-
-        function openPhotoBook(event) {
-            if (event) {
-                event.stopPropagation(); // Prevent fireworks from triggering
-                event.preventDefault();
-            }
-            console.log('Opening photo book...'); // Debug message
-            document.getElementById('photoBook').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            currentPage = 1;
-            showPage(currentPage);
-        }
-
-        function closePhotoBook() {
-            document.getElementById('photoBook').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
-
-        function nextPage() {
-            if (currentPage < totalPages) {
-                currentPage++;
-                showPage(currentPage);
-            }
-        }
-
-        function previousPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                showPage(currentPage);
-            }
-        }
-
-        function showPage(pageNum) {
-            // Hide all pages
-            const pages = document.querySelectorAll('.book-page');
-            pages.forEach(page => {
-                page.classList.remove('active');
+            // Chỉ pháo hoa canvas confetti tại vị trí click - đã giảm số lượng
+            confetti({
+                particleCount: 50,
+                spread: 50,
+                origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
+                colors: ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff']
             });
-
-            // Show current page
-            const currentPageElement = document.querySelector(`[data-page="${pageNum}"]`);
-            if (currentPageElement) {
-                currentPageElement.classList.add('active');
-            }
-
-            // Update page indicator
-            document.getElementById('pageIndicator').textContent = `${pageNum} / ${totalPages}`;
-
-            // Update navigation buttons
-            document.getElementById('prevBtn').style.opacity = pageNum === 1 ? '0.5' : '1';
-            document.getElementById('nextBtn').style.opacity = pageNum === totalPages ? '0.5' : '1';
-        }
-
-        // Close photo book when clicking outside the page content
-        document.addEventListener('click', function (e) {
-            const photoBook = document.getElementById('photoBook');
-            const bookPage = document.querySelector('.book-page.active');
-            const navigation = document.querySelector('.book-navigation');
-
-            if (photoBook && photoBook.style.display === 'flex') {
-                if (!bookPage.contains(e.target) && !navigation.contains(e.target)) {
-                    closePhotoBook();
-                }
-            }
-        });
-
-        // Keyboard navigation for photo book
-        document.addEventListener('keydown', function (e) {
-            const photoBook = document.getElementById('photoBook');
-            if (photoBook && photoBook.style.display === 'flex') {
-                if (e.key === 'ArrowRight') {
-                    nextPage();
-                } else if (e.key === 'ArrowLeft') {
-                    previousPage();
-                } else if (e.key === 'Escape') {
-                    closePhotoBook();
-                }
-            }
-        });
-
-        // Touch/Swipe navigation for photo book
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let touchStartY = 0;
-        let touchEndY = 0;
-        const minSwipeDistance = 50; // Minimum distance for a swipe
-
-        function handleSwipeGesture() {
-            const photoBook = document.getElementById('photoBook');
-            if (photoBook && photoBook.style.display === 'flex') {
-                const deltaX = touchEndX - touchStartX;
-                const deltaY = touchEndY - touchStartY;
-
-                // Check if horizontal swipe is more significant than vertical
-                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
-                    if (deltaX > 0) {
-                        // Swipe right - go to previous page
-                        previousPage();
-                    } else {
-                        // Swipe left - go to next page
-                        nextPage();
-                    }
-                }
-            }
-        }
-
-        // Add touch event listeners to the photo book
-        document.addEventListener('DOMContentLoaded', function () {
-            const photoBook = document.getElementById('photoBook');
-
-            if (photoBook) {
-                photoBook.addEventListener('touchstart', function (e) {
-                    touchStartX = e.changedTouches[0].screenX;
-                    touchStartY = e.changedTouches[0].screenY;
-                }, { passive: true });
-
-                photoBook.addEventListener('touchend', function (e) {
-                    touchEndX = e.changedTouches[0].screenX;
-                    touchEndY = e.changedTouches[0].screenY;
-                    handleSwipeGesture();
-                }, { passive: true });
-            }
-        });
-
-        // Mouse swipe simulation for desktop (optional)
-        let mouseStartX = 0;
-        let mouseEndX = 0;
-        let isMouseDown = false;
-
-        document.addEventListener('mousedown', function (e) {
-            const photoBook = document.getElementById('photoBook');
-            if (photoBook && photoBook.style.display === 'flex') {
-                isMouseDown = true;
-                mouseStartX = e.clientX;
-            }
-        });
-
-        document.addEventListener('mouseup', function (e) {
-            const photoBook = document.getElementById('photoBook');
-            if (photoBook && photoBook.style.display === 'flex' && isMouseDown) {
-                isMouseDown = false;
-                mouseEndX = e.clientX;
-                const deltaX = mouseEndX - mouseStartX;
-
-                if (Math.abs(deltaX) > minSwipeDistance) {
-                    if (deltaX > 0) {
-                        // Mouse drag right - go to previous page
-                        previousPage();
-                    } else {
-                        // Mouse drag left - go to next page
-                        nextPage();
-                    }
-                }
-            }
-        });
-
-        document.addEventListener('mouseleave', function () {
-            isMouseDown = false;
         });
     </script>
 </body>

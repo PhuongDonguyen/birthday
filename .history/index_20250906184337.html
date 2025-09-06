@@ -435,10 +435,10 @@
 
         /* Photo Book Styles */
         .photo-book-section {
-            padding: 50px 0 150px 20px;
+            padding: 50px 20px;
             text-align: center;
             background: linear-gradient(135deg, #f5f3f0, #e8e5e0);
-            margin: 20px 0;
+            margin: 50px 0;
         }
 
         .photo-book-title {
@@ -453,72 +453,194 @@
             max-width: 600px;
             margin: 0 auto;
             position: relative;
+            perspective: 1000px;
+        }
+
+        .book-container {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.6s ease;
         }
 
         .book-cover {
-            width: 300px;
-            height: 400px;
+            width: 280px;
+            height: 380px;
             margin: 0 auto;
-            background: linear-gradient(145deg, #8b4513, #a0522d);
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: all 0.6s ease;
         }
 
         .book-cover:hover {
-            transform: translateY(-10px) rotateY(5deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: rotateY(-15deg) rotateX(5deg);
+        }
+
+        /* Book Front Cover */
+        .book-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #8B4513, #A0522D, #8B4513);
+            border-radius: 8px 0 0 8px;
+            box-shadow: 
+                inset 0 0 20px rgba(0,0,0,0.2),
+                inset 5px 0 10px rgba(0,0,0,0.1),
+                0 0 30px rgba(0,0,0,0.3);
+            transform: translateZ(15px);
+            overflow: hidden;
+        }
+
+        .book-front::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 5px;
+            pointer-events: none;
+        }
+
+        .book-front::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255,255,255,0.1) 50%, 
+                transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Book Spine */
+        .book-spine {
+            position: absolute;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(to right, #654321, #8B4513, #654321);
+            left: -15px;
+            transform: rotateY(-90deg);
+            transform-origin: right center;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        .book-spine::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 5px;
+            right: 5px;
+            height: 2px;
+            background: rgba(255,215,0,0.5);
+            box-shadow: 0 100px 0 rgba(255,215,0,0.5), 0 200px 0 rgba(255,215,0,0.5);
+        }
+
+        /* Book Pages */
+        .book-pages-side {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #f5f5f5, #ffffff, #f5f5f5);
+            right: -3px;
+            transform: translateZ(-1px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            border-radius: 0 5px 5px 0;
+        }
+
+        .book-pages-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                #e0e0e0 0px,
+                #e0e0e0 1px,
+                transparent 1px,
+                transparent 3px
+            );
+        }
+
+        /* Book Back Cover */
+        .book-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #654321, #8B4513);
+            transform: translateZ(-2px);
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
         }
 
         .cover-content {
-            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+            padding: 40px 25px;
             color: white;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
 
         .cover-content h3 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
             font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #FFD700;
         }
 
         .cover-content p {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
             font-family: 'Dancing Script', cursive;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            color: #FFF8DC;
         }
 
         .cover-decoration {
-            font-size: 3rem;
-            margin: 20px 0;
+            font-size: 3.5rem;
+            margin: 25px 0;
             animation: heartbeat 2s infinite;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
         }
 
         .open-text {
             font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 20px;
-            padding: 8px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
+            opacity: 0.9;
+            margin-top: 25px;
+            padding: 10px 18px;
+            border: 2px solid rgba(255,215,0,0.6);
+            border-radius: 25px;
+            background: rgba(255,215,0,0.1);
+            backdrop-filter: blur(5px);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .open-text:hover {
+            background: rgba(255,215,0,0.2);
+            transform: scale(1.05);
         }
 
         @keyframes heartbeat {
-
-            0%,
-            100% {
-                transform: scale(1);
+            0%, 100% { 
+                transform: scale(1); 
+                filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
             }
-
-            50% {
-                transform: scale(1.1);
+            50% { 
+                transform: scale(1.15); 
+                filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.4));
             }
         }
 
@@ -538,7 +660,7 @@
 
         .book-navigation {
             position: absolute;
-            bottom: 20px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -1053,12 +1175,24 @@
         <h2 class="photo-book-title">📖 Album Kỷ Niệm</h2>
         <div class="photo-book">
             <div class="book-cover" onclick="openPhotoBook(event)">
-                <div class="cover-content">
-                    <h3>Những Khoảnh Khắc</h3>
-                    <p>Đẹp Nhất</p>
-                    <div class="cover-decoration">❤️</div>
-                    <div class="open-text">Click để mở</div>
+                <!-- Book Front Cover -->
+                <div class="book-front">
+                    <div class="cover-content">
+                        <h3>Những Khoảnh Khắc</h3>
+                        <p>Đẹp Nhất</p>
+                        <div class="cover-decoration">❤️</div>
+                        <div class="open-text">Click để mở</div>
+                    </div>
                 </div>
+                
+                <!-- Book Spine -->
+                <div class="book-spine"></div>
+                
+                <!-- Book Pages Side View -->
+                <div class="book-pages-side"></div>
+                
+                <!-- Book Back Cover -->
+                <div class="book-back"></div>
             </div>
 
             <div class="book-pages" id="photoBook" style="display: none;">
@@ -1596,86 +1730,6 @@
                     closePhotoBook();
                 }
             }
-        });
-
-        // Touch/Swipe navigation for photo book
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let touchStartY = 0;
-        let touchEndY = 0;
-        const minSwipeDistance = 50; // Minimum distance for a swipe
-
-        function handleSwipeGesture() {
-            const photoBook = document.getElementById('photoBook');
-            if (photoBook && photoBook.style.display === 'flex') {
-                const deltaX = touchEndX - touchStartX;
-                const deltaY = touchEndY - touchStartY;
-
-                // Check if horizontal swipe is more significant than vertical
-                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
-                    if (deltaX > 0) {
-                        // Swipe right - go to previous page
-                        previousPage();
-                    } else {
-                        // Swipe left - go to next page
-                        nextPage();
-                    }
-                }
-            }
-        }
-
-        // Add touch event listeners to the photo book
-        document.addEventListener('DOMContentLoaded', function () {
-            const photoBook = document.getElementById('photoBook');
-
-            if (photoBook) {
-                photoBook.addEventListener('touchstart', function (e) {
-                    touchStartX = e.changedTouches[0].screenX;
-                    touchStartY = e.changedTouches[0].screenY;
-                }, { passive: true });
-
-                photoBook.addEventListener('touchend', function (e) {
-                    touchEndX = e.changedTouches[0].screenX;
-                    touchEndY = e.changedTouches[0].screenY;
-                    handleSwipeGesture();
-                }, { passive: true });
-            }
-        });
-
-        // Mouse swipe simulation for desktop (optional)
-        let mouseStartX = 0;
-        let mouseEndX = 0;
-        let isMouseDown = false;
-
-        document.addEventListener('mousedown', function (e) {
-            const photoBook = document.getElementById('photoBook');
-            if (photoBook && photoBook.style.display === 'flex') {
-                isMouseDown = true;
-                mouseStartX = e.clientX;
-            }
-        });
-
-        document.addEventListener('mouseup', function (e) {
-            const photoBook = document.getElementById('photoBook');
-            if (photoBook && photoBook.style.display === 'flex' && isMouseDown) {
-                isMouseDown = false;
-                mouseEndX = e.clientX;
-                const deltaX = mouseEndX - mouseStartX;
-
-                if (Math.abs(deltaX) > minSwipeDistance) {
-                    if (deltaX > 0) {
-                        // Mouse drag right - go to previous page
-                        previousPage();
-                    } else {
-                        // Mouse drag left - go to next page
-                        nextPage();
-                    }
-                }
-            }
-        });
-
-        document.addEventListener('mouseleave', function () {
-            isMouseDown = false;
         });
     </script>
 </body>
